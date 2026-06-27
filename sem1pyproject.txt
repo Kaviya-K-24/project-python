@@ -1,0 +1,136 @@
+import random
+
+total_score = 0
+
+# ------------------ GAME 1 ------------------
+def number_guess():
+    global total_score
+    number = random.randint(1, 50)
+    
+    print("\n🎯 Number Guessing Game")
+    
+    while True:
+        guess = int(input("Guess (1-50): "))
+        
+        if guess == number:
+            print("✅ Correct!")
+            total_score += 10
+            break
+        elif guess < number:
+            print("Too low!")
+        else:
+            print("Too high!")
+
+# ------------------ GAME 2 ------------------
+def rps():
+    global total_score
+    print("\n✊ Rock Paper Scissors")
+    
+    choices = ["rock", "paper", "scissors"]
+    comp = random.choice(choices)
+    
+    user = input("Enter rock/paper/scissors: ").lower()
+    
+    print("Computer:", comp)
+    
+    if user == comp:
+        print("Tie!")
+    elif (user == "rock" and comp == "scissors") or \
+         (user == "paper" and comp == "rock") or \
+         (user == "scissors" and comp == "paper"):
+        print("You Win!")
+        total_score += 10
+    else:
+        print("You Lose!")
+
+# ------------------ GAME 3 ------------------
+def quiz():
+    global total_score
+    score = 0
+
+    questions = [
+        {
+            "q": "What is the capital of India?",
+            "options": ["A. Mumbai", "B. Delhi", "C. Chennai", "D. Kolkata"],
+            "answer": "b"
+        },
+        {
+            "q": "2 + 2 = ?",
+            "options": ["A. 3", "B. 4", "C. 5", "D. 6"],
+            "answer": "b"
+        },
+        {
+            "q": "Which language is used for Python programming?",
+            "options": ["A. English", "B. Machine", "C. Programming Language", "D. Binary"],
+            "answer": "c"
+        }
+    ]
+
+    print("\n🧠 Quiz Game (Choose A/B/C/D)\n")
+
+    for q in questions:
+        print(q["q"])
+        
+        for option in q["options"]:
+            print(option)
+        
+        user = input("Your answer: ").lower()
+
+        if user == q["answer"]:
+            print("✅ Correct!\n")
+            score += 1
+        else:
+            print("❌ Wrong! Correct answer is:", q["answer"].upper(), "\n")
+
+    print("🏆 Final Score:", score, "/", len(questions))
+    
+    total_score += score * 5
+
+# ------------------ GAME 4 ------------------
+def survival():
+    global total_score
+    print("\n⚡ Survival Game")
+    
+    score = 0
+    
+    while True:
+        action = random.choice(["run", "hide"])
+        user = input("Enemy coming! run/hide: ").lower()
+        
+        if user == action:
+            print("Safe!")
+            score += 5
+        else:
+            print("Caught!")
+            break
+    
+    print("Survival Score:", score)
+    total_score += score
+
+# ------------------ MAIN MENU ------------------
+while True:
+    print("\n====== 🎮 GAME HUB ======")
+    print("1. Number Guess")
+    print("2. Rock Paper Scissors")
+    print("3. Quiz Game")
+    print("4. Survival Game")
+    print("5. Show Total Score")
+    print("6. Exit")
+    
+    choice = input("Enter choice: ")
+    
+    if choice == "1":
+        number_guess()
+    elif choice == "2":
+        rps()
+    elif choice == "3":
+        quiz()
+    elif choice == "4":
+        survival()
+    elif choice == "5":
+        print("🏆 Total Score:", total_score)
+    elif choice == "6":
+        print("Exiting Game... Final Score:", total_score)
+        break
+    else:
+        print("Invalid choice!")
